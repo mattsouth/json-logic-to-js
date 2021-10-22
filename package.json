@@ -1,0 +1,15 @@
+{
+  "name": "json-logic-to-js",
+  "version": "0.1.0",
+  "description": "Serialise JsonLogic object expressions as Javascript string expressions",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Matt South",
+  "license": "MIT",
+  "devDependencies": {
+    "js-to-json-logic": "^0.1.3",
+    "mocha": "^9.1.3"
+  }
+}
