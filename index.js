@@ -46,6 +46,6 @@ function render(expr, depth=0) {
 /**
  * convert jsonLogic expression to equivalent javascript expression string.
  */
-module.exports = function renderJsonLogic(expr) {
+export default function renderJsonLogic(expr) {
     return render(expr);
 }

@@ -1,6 +1,6 @@
-const assert = require('assert');
-const transformJS = require("js-to-json-logic");
-const renderJsonLogic = require("./index");
+import assert from 'assert';
+import transformJS from "js-to-json-logic";
+import renderJsonLogic  from "./index.js";
 
 // these tests cant ensure that this library is the inverse of js-to-json-logic,
 // but they can provide confidence that the two can be thought of as compatible

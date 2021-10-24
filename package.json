@@ -1,7 +1,7 @@
 {
   "name": "json-logic-to-js",
-  "version": "0.1.0",
-  "description": "Serialise JsonLogic object expressions as Javascript string expressions",
+  "version": "0.2.0",
+  "description": "Serialise JSON Logic objects into JavaScript syntax.",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
@@ -11,5 +11,8 @@
   "devDependencies": {
     "js-to-json-logic": "^0.1.3",
     "mocha": "^9.1.3"
-  }
+  },
+  "type": "module",
+  "repository": "https://github.com/mattsouth/json-logic-to-js",
+  "files": [ "index.js" ]
 }
