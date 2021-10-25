@@ -24,3 +24,7 @@ e.g. from a visual editor that would need to manipulate the JL object. Hence I c
 
 1. serialise expressions that include all defined JL operators
 2. be compatible with js-to-json-logic
+
+## Useful
+
+https://stackoverflow.com/questions/6003884/how-do-i-check-for-null-values-in-javascript

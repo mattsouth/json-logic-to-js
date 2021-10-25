@@ -30,13 +30,17 @@ const rendermap = {
 // workhorse recursive function
 function render(expr, depth=0) {
     if (typeof expr === "object") {
-        const [key, value] = Object.entries(expr)[0];
-        if (Object.keys(rendermap).includes(key)) {
-            return rendermap[key](value, depth+1);
+        if (expr !== null && Object.keys(expr).length>0) {
+            const [key, value] = Object.entries(expr)[0];
+            if (Object.keys(rendermap).includes(key)) {
+                return rendermap[key](value, depth+1);
+            } else {
+                // default rendering of an operator is "prefixmany"
+                return key + "(" + value.map((arg) => render(arg, depth)).join(", ") + ")";
+            }
         } else {
-            // default rendering of an operator is "prefixmany"
-            return key + "(" + value.map((arg) => render(arg, depth)).join(", ") + ")";
-        }
+            return "";
+        };
     } else {
         // should suffice for all non-object valued expressions
         return JSON.stringify(expr);

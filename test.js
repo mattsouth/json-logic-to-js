@@ -15,7 +15,7 @@ const roundtrips = [
   { text: "!ok", obj: {"!": [{var: "ok"}]}}
 ]
 
-describe('example roundtrips:', () => {
+describe('example roundtrips', () => {
   for (const test of roundtrips) {
     it(test.text, () => {
       const expr = transformJS(test.text);
@@ -23,4 +23,19 @@ describe('example roundtrips:', () => {
       assert.equal(renderJsonLogic(expr), test.text);
     })
   }
+});
+
+describe('edge cases', () => {
+  it('empty object', () => {
+    assert.equal(renderJsonLogic({}), "");
+  });
+  it('null', () => {
+    assert.equal(renderJsonLogic(null), ""); // might be better to raise exception
+  });
+  it('undefined', () => {
+    assert.equal(renderJsonLogic(undefined), undefined); // follows JSON.stringify
+  });
+  it('NaN', () => {
+    assert.equal(renderJsonLogic(NaN), "null"); // follows JSON.stringify
+  });
 });

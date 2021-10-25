@@ -1,6 +1,6 @@
 {
   "name": "json-logic-to-js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Serialise JSON Logic objects into JavaScript syntax.",
   "main": "index.js",
   "scripts": {
