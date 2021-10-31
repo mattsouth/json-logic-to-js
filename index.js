@@ -15,6 +15,14 @@ function prefix1(functor) {
     }
 }
 
+function renderif(args, depth) {
+    if (args.length==3) {
+        return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else { " + render(args[2], depth) + "}";
+    } else {
+        return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else " + renderif(args.splice(2), depth);
+    }
+}
+
 // a map of custom strategies for rendering operators
 const rendermap = {
     var: (args) => Array.isArray(args) ? args[0] : args,
@@ -22,7 +30,7 @@ const rendermap = {
     or: infix2("||"),
     "!": prefix1("!"),
     "!!": prefix1("!!"),
-    if: (args, depth) => render(args[0], depth) + " ? " + render(args[1], depth) + " : " + render(args[2], depth)
+    if: renderif
 };
 
 [">=","<=","<",">","==","===","!=","!==","+","-","*","/","%"].forEach((sym) => rendermap[sym] = infix2(sym));
