@@ -168,6 +168,8 @@ describe('edge cases', () => {
                 }
             ]
         };
+        const copy = JSON.parse(JSON.stringify(fizzbuzz));
         assert.equal(renderJsonLogic(fizzbuzz), "if ((i % 15) == 0) { \"fizzbuzz\" } else if ((i % 3) == 0) { \"fizz\" } else if ((i % 5) == 0) { \"buzz\" } else { i}");
+        assert.deepEqual(fizzbuzz, copy, "expression should not be changed by render");
     })
 });

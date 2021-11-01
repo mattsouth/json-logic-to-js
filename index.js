@@ -19,7 +19,8 @@ function renderif(args, depth) {
     if (args.length == 3) {
         return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else { " + render(args[2], depth) + "}";
     } else if (args.length > 3) {
-        return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else " + renderif(args.splice(2), depth);
+        const copy = JSON.parse(JSON.stringify(args));
+        return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else " + renderif(copy.splice(2), depth);
     }
 }
 
