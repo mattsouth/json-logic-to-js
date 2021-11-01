@@ -7,17 +7,35 @@ import renderJsonLogic from "./index.js";
 
 // note that spaces and brackets in the text fields below are adjusted to match expected output
 const roundtrips = [{
-        text: "age <= 65",
+        text: "1 == 1",
         obj: {
-            "<=": [{
-                var: "age"
-            }, 65]
+            "==": [1, 1]
+        }
+    },
+    {
+        text: "(3 > 1) && (1 < 3)",
+        obj: {
+            "and": [{
+                    ">": [3, 1]
+                },
+                {
+                    "<": [1, 3]
+                }
+            ]
         }
     },
     {
         text: "temperature",
         obj: {
             var: "temperature"
+        }
+    },
+    {
+        text: "age <= 65",
+        obj: {
+            "<=": [{
+                var: "age"
+            }, 65]
         }
     },
     {
@@ -66,8 +84,7 @@ const roundtrips = [{
                 },
                 "fizzbuzz",
                 {
-                    "if": [
-                        {
+                    "if": [{
                             "==": [{
                                 "%": [{
                                     "var": "i"
@@ -76,8 +93,7 @@ const roundtrips = [{
                         },
                         "fizz",
                         {
-                            "if": [
-                                {
+                            "if": [{
                                     "==": [{
                                         "%": [{
                                             "var": "i"
@@ -120,4 +136,38 @@ describe('edge cases', () => {
     it('NaN', () => {
         assert.equal(renderJsonLogic(NaN), "null"); // follows JSON.stringify
     });
+    it('fizzbuzz', () => {
+        // a formulation of fizzbuzz that is supported by json-logic but doesnt seem to be created by js-to-json-logic so not covered by the associated round-trip test
+        const fizzbuzz = {
+            "if": [{
+                    "==": [{
+                        "%": [{
+                            "var": "i"
+                        }, 15]
+                    }, 0]
+                },
+                "fizzbuzz",
+                {
+                    "==": [{
+                        "%": [{
+                            "var": "i"
+                        }, 3]
+                    }, 0]
+                },
+                "fizz",
+                {
+                    "==": [{
+                        "%": [{
+                            "var": "i"
+                        }, 5]
+                    }, 0]
+                },
+                "buzz",
+                {
+                    "var": "i"
+                }
+            ]
+        };
+        assert.equal(renderJsonLogic(fizzbuzz), "if ((i % 15) == 0) { \"fizzbuzz\" } else if ((i % 3) == 0) { \"fizz\" } else if ((i % 5) == 0) { \"buzz\" } else { i}");
+    })
 });

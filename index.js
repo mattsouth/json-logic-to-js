@@ -3,7 +3,7 @@ function infix2(functor) {
     // expects args to be a double valued array.  ignores any other array elements.
     return function(args, depth) {
         const rendered = render(args[0], depth) + " " + functor + " " + render(args[1], depth);
-        return depth>1 ? "(" + rendered + ")" : rendered;
+        return depth > 1 ? "(" + rendered + ")" : rendered;
     }
 }
 
@@ -16,9 +16,9 @@ function prefix1(functor) {
 }
 
 function renderif(args, depth) {
-    if (args.length==3) {
+    if (args.length == 3) {
         return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else { " + render(args[2], depth) + "}";
-    } else {
+    } else if (args.length > 3) {
         return "if " + render(args[0], depth) + " { " + render(args[1], depth) + " } else " + renderif(args.splice(2), depth);
     }
 }
@@ -33,15 +33,15 @@ const rendermap = {
     if: renderif
 };
 
-[">=","<=","<",">","==","===","!=","!==","+","-","*","/","%"].forEach((sym) => rendermap[sym] = infix2(sym));
+[">=", "<=", "<", ">", "==", "===", "!=", "!==", "+", "-", "*", "/", "%"].forEach((sym) => rendermap[sym] = infix2(sym));
 
 // workhorse recursive function
-function render(expr, depth=0) {
+function render(expr, depth = 0) {
     if (typeof expr === "object") {
-        if (expr !== null && Object.keys(expr).length>0) {
+        if (expr !== null && Object.keys(expr).length > 0) {
             const [key, value] = Object.entries(expr)[0];
             if (Object.keys(rendermap).includes(key)) {
-                return rendermap[key](value, depth+1);
+                return rendermap[key](value, depth + 1);
             } else {
                 // default rendering of an operator is "prefixmany"
                 return key + "(" + value.map((arg) => render(arg, depth)).join(", ") + ")";
