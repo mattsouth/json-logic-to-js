@@ -39,7 +39,9 @@ const rendermap = {
 // workhorse recursive function
 function render(expr, depth = 0) {
     if (typeof expr === "object") {
-        if (expr !== null && Object.keys(expr).length > 0) {
+        if (expr === null) {
+            return "null";
+        } else if (Object.keys(expr).length > 0) {
             const [key, value] = Object.entries(expr)[0];
             if (Object.keys(rendermap).includes(key)) {
                 return rendermap[key](value, depth + 1);

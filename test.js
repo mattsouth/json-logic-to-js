@@ -110,6 +110,10 @@ const roundtrips = [{
                 }
             ]
         }
+    },
+    {
+      text: "0 == null",
+      obj: {"==":[0, null]}
     }
 ];
 
@@ -128,7 +132,7 @@ describe('edge cases', () => {
         assert.equal(renderJsonLogic({}), "");
     });
     it('null', () => {
-        assert.equal(renderJsonLogic(null), ""); // might be better to raise exception
+        assert.equal(renderJsonLogic(null), "null");
     });
     it('undefined', () => {
         assert.equal(renderJsonLogic(undefined), undefined); // follows JSON.stringify
